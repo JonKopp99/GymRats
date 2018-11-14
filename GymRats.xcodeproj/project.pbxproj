@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB11B022219C07C2009894A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB11B021219C07C1009894A8 /* GoogleService-Info.plist */; };
+		AB4F1D8D21924AF000597440 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1D8C21924AF000597440 /* AppDelegate.swift */; };
+		AB4F1D8F21924AF000597440 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1D8E21924AF000597440 /* ViewController.swift */; };
+		AB4F1D9221924AF000597440 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1D9021924AF000597440 /* Main.storyboard */; };
+		AB4F1D9521924AF000597440 /* GymRats.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1D9321924AF000597440 /* GymRats.xcdatamodeld */; };
+		AB4F1D9A21924AF100597440 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1D9821924AF100597440 /* LaunchScreen.storyboard */; };
+		AB4F1DA321924B2000597440 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DA221924B2000597440 /* Home.swift */; };
+		AB4F1DA521924B7D00597440 /* logInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DA421924B7D00597440 /* logInVC.swift */; };
+		AB4F1DA721924B8A00597440 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DA621924B8A00597440 /* signUpVC.swift */; };
+		AB4F1DA92192557600597440 /* workoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DA82192557600597440 /* workoutsVC.swift */; };
+		AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DAB21927E9900597440 /* workoutsCell.swift */; };
+		AB4F1DAF2192CEC400597440 /* toDo in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DAE2192CEC400597440 /* toDo */; };
+		AB4F1DB32197966100597440 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DB22197966100597440 /* assets.xcassets */; };
+		ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B02198F25200571DF1 /* workoutsTableView.swift */; };
+		ABB508B42198F30400571DF1 /* workoutsTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B32198F30400571DF1 /* workoutsTBCell.swift */; };
+		D647DE0F181999D900F4046C /* Pods_GymRats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		45A09A162B554216BCCC5DD5 /* Pods-GymRats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymRats.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymRats/Pods-GymRats.debug.xcconfig"; sourceTree = "<group>"; };
+		926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymRats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB11B021219C07C1009894A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB4F1D8921924AF000597440 /* GymRats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymRats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB4F1D8C21924AF000597440 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AB4F1D8E21924AF000597440 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AB4F1D9121924AF000597440 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AB4F1D9421924AF000597440 /* GymRats.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GymRats.xcdatamodel; sourceTree = "<group>"; };
+		AB4F1D9921924AF100597440 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB4F1D9B21924AF100597440 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB4F1DA221924B2000597440 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		AB4F1DA421924B7D00597440 /* logInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logInVC.swift; sourceTree = "<group>"; };
+		AB4F1DA621924B8A00597440 /* signUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
+		AB4F1DA82192557600597440 /* workoutsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsVC.swift; sourceTree = "<group>"; };
+		AB4F1DAB21927E9900597440 /* workoutsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsCell.swift; sourceTree = "<group>"; };
+		AB4F1DAE2192CEC400597440 /* toDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = toDo; sourceTree = "<group>"; };
+		AB4F1DB22197966100597440 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		ABB508B02198F25200571DF1 /* workoutsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTableView.swift; sourceTree = "<group>"; };
+		ABB508B32198F30400571DF1 /* workoutsTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTBCell.swift; sourceTree = "<group>"; };
+		BDE0BE5C80EDE8128A2F3BA3 /* Pods-GymRats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymRats.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymRats/Pods-GymRats.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB4F1D8621924AF000597440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D647DE0F181999D900F4046C /* Pods_GymRats.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02D3A00EDA96940C4EC94B3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB4F1D8021924AF000597440 = {
+			isa = PBXGroup;
+			children = (
+				AB4F1DB22197966100597440 /* assets.xcassets */,
+				AB4F1DAA21927E7B00597440 /* Cells */,
+				AB4F1D8B21924AF000597440 /* GymRats */,
+				AB4F1D8A21924AF000597440 /* Products */,
+				E0F0261A1B7DEFBA32C5C32E /* Pods */,
+				02D3A00EDA96940C4EC94B3A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AB4F1D8A21924AF000597440 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB4F1D8921924AF000597440 /* GymRats.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB4F1D8B21924AF000597440 /* GymRats */ = {
+			isa = PBXGroup;
+			children = (
+				AB4F1DA121924B0500597440 /* ViewControllers */,
+				AB4F1D8C21924AF000597440 /* AppDelegate.swift */,
+				AB4F1D8E21924AF000597440 /* ViewController.swift */,
+				AB4F1D9021924AF000597440 /* Main.storyboard */,
+				AB4F1D9821924AF100597440 /* LaunchScreen.storyboard */,
+				AB4F1D9B21924AF100597440 /* Info.plist */,
+				AB11B021219C07C1009894A8 /* GoogleService-Info.plist */,
+				AB4F1D9321924AF000597440 /* GymRats.xcdatamodeld */,
+				AB4F1DAE2192CEC400597440 /* toDo */,
+			);
+			path = GymRats;
+			sourceTree = "<group>";
+		};
+		AB4F1DA121924B0500597440 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AB4F1DA221924B2000597440 /* Home.swift */,
+				AB4F1DA421924B7D00597440 /* logInVC.swift */,
+				AB4F1DA621924B8A00597440 /* signUpVC.swift */,
+				AB4F1DA82192557600597440 /* workoutsVC.swift */,
+				ABB508B02198F25200571DF1 /* workoutsTableView.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AB4F1DAA21927E7B00597440 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB4F1DAB21927E9900597440 /* workoutsCell.swift */,
+				ABB508B32198F30400571DF1 /* workoutsTBCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E0F0261A1B7DEFBA32C5C32E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45A09A162B554216BCCC5DD5 /* Pods-GymRats.debug.xcconfig */,
+				BDE0BE5C80EDE8128A2F3BA3 /* Pods-GymRats.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB4F1D8821924AF000597440 /* GymRats */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB4F1D9E21924AF100597440 /* Build configuration list for PBXNativeTarget "GymRats" */;
+			buildPhases = (
+				668CEC0C790B2F37DE2D6B87 /* [CP] Check Pods Manifest.lock */,
+				AB4F1D8521924AF000597440 /* Sources */,
+				AB4F1D8621924AF000597440 /* Frameworks */,
+				AB4F1D8721924AF000597440 /* Resources */,
+				67EC8FFC2998362E5826DD9D /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GymRats;
+			productName = GymRats;
+			productReference = AB4F1D8921924AF000597440 /* GymRats.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB4F1D8121924AF000597440 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Jonathan Kopp";
+				TargetAttributes = {
+					AB4F1D8821924AF000597440 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = AB4F1D8421924AF000597440 /* Build configuration list for PBXProject "GymRats" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB4F1D8021924AF000597440;
+			productRefGroup = AB4F1D8A21924AF000597440 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB4F1D8821924AF000597440 /* GymRats */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB4F1D8721924AF000597440 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4F1D9A21924AF100597440 /* LaunchScreen.storyboard in Resources */,
+				AB4F1DAF2192CEC400597440 /* toDo in Resources */,
+				AB11B022219C07C2009894A8 /* GoogleService-Info.plist in Resources */,
+				AB4F1DB32197966100597440 /* assets.xcassets in Resources */,
+				AB4F1D9221924AF000597440 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		668CEC0C790B2F37DE2D6B87 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GymRats-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67EC8FFC2998362E5826DD9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GymRats/Pods-GymRats-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymRats/Pods-GymRats-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB4F1D8521924AF000597440 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */,
+				AB4F1DA721924B8A00597440 /* signUpVC.swift in Sources */,
+				AB4F1D8F21924AF000597440 /* ViewController.swift in Sources */,
+				AB4F1D8D21924AF000597440 /* AppDelegate.swift in Sources */,
+				AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */,
+				AB4F1DA321924B2000597440 /* Home.swift in Sources */,
+				AB4F1DA92192557600597440 /* workoutsVC.swift in Sources */,
+				AB4F1D9521924AF000597440 /* GymRats.xcdatamodeld in Sources */,
+				AB4F1DA521924B7D00597440 /* logInVC.swift in Sources */,
+				ABB508B42198F30400571DF1 /* workoutsTBCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AB4F1D9021924AF000597440 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4F1D9121924AF000597440 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AB4F1D9821924AF100597440 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4F1D9921924AF100597440 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB4F1D9C21924AF100597440 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AB4F1D9D21924AF100597440 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB4F1D9F21924AF100597440 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45A09A162B554216BCCC5DD5 /* Pods-GymRats.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RUS5Y57VG8;
+				INFOPLIST_FILE = GymRats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.JonathanKopp.GymRats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB4F1DA021924AF100597440 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDE0BE5C80EDE8128A2F3BA3 /* Pods-GymRats.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RUS5Y57VG8;
+				INFOPLIST_FILE = GymRats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.JonathanKopp.GymRats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB4F1D8421924AF000597440 /* Build configuration list for PBXProject "GymRats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB4F1D9C21924AF100597440 /* Debug */,
+				AB4F1D9D21924AF100597440 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB4F1D9E21924AF100597440 /* Build configuration list for PBXNativeTarget "GymRats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB4F1D9F21924AF100597440 /* Debug */,
+				AB4F1DA021924AF100597440 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AB4F1D9321924AF000597440 /* GymRats.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AB4F1D9421924AF000597440 /* GymRats.xcdatamodel */,
+			);
+			currentVersion = AB4F1D9421924AF000597440 /* GymRats.xcdatamodel */;
+			path = GymRats.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = AB4F1D8121924AF000597440 /* Project object */;
+}

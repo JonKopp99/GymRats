@@ -1,0 +1,83 @@
+Ability to add pictures and names to the repositories DONE
+FIx the layout of the cells
+Move name label
+Add nav bar at bottom
+FInish icons for nav bar
+
+
+Shoulders 1.
+biceps 2.
+triceps 3.
+chest 4.
+legs 5.
+back 6.
+core 7.
+saved 8.
+progress 9.
+
+try blue for workout dude w white background
+//
+//  workoutsTBCell.swift
+//  GymRats
+//
+//  Created by Jonathan Kopp on 11/11/18.
+//  Copyright © 2018 Jonathan Kopp. All rights reserved.
+//
+
+//
+//  workoutsCell.swift
+//  GymRats
+//
+//  Created by Jonathan Kopp on 11/6/18.
+//  Copyright © 2018 Jonathan Kopp. All rights reserved.
+//
+
+import UIKit
+class workoutsTBCell: UITableViewCell {
+@IBOutlet weak var name: UILabel!
+@IBOutlet weak var theImage: UIImageView!
+var complete: Bool!
+var completeButton: UIButton!
+override func layoutSubviews() {
+
+theImage.frame = CGRect(x: 5, y: 5, width: frame.width * 0.3, height: frame.height-10)
+theImage.contentMode = .scaleAspectFit
+name.frame = CGRect(x: frame.width * 0.3 + 20, y: frame.height/2-20, width: frame.width/2, height: 40)
+
+if(complete == nil)
+{
+complete = false
+}
+
+completeButton = UIButton(frame: CGRect(x: frame.width-50, y: frame.height/2-25, width: 50, height: 50))
+if(complete)
+{
+completeButton.setImage(#imageLiteral(resourceName: "checkMark"), for: .normal)
+}
+else
+{
+completeButton.setImage(#imageLiteral(resourceName: "xMark"), for: .normal)
+}
+completeButton.backgroundColor = .clear
+completeButton.addTarget(self, action:#selector(self.completeButtonPressed), for: .touchUpInside)
+self.addSubview(completeButton)
+
+}
+@objc func completeButtonPressed()
+{
+completeButton.removeFromSuperview()
+print("Tap Recognized")
+if(complete)
+{
+complete = false
+
+completeButton.setImage(#imageLiteral(resourceName: "xMark"), for: .normal)
+}
+else
+{
+completeButton.setImage(#imageLiteral(resourceName: "checkMark"), for: .normal)
+complete = true
+}
+self.addSubview(completeButton)
+}
+}
