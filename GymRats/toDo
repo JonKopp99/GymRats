@@ -15,69 +15,40 @@ core 7.
 saved 8.
 progress 9.
 
-try blue for workout dude w white background
-//
-//  workoutsTBCell.swift
-//  GymRats
-//
-//  Created by Jonathan Kopp on 11/11/18.
-//  Copyright © 2018 Jonathan Kopp. All rights reserved.
-//
 
-//
-//  workoutsCell.swift
-//  GymRats
-//
-//  Created by Jonathan Kopp on 11/6/18.
-//  Copyright © 2018 Jonathan Kopp. All rights reserved.
-//
+fix that its constantly downloading image :0
 
-import UIKit
-class workoutsTBCell: UITableViewCell {
-@IBOutlet weak var name: UILabel!
-@IBOutlet weak var theImage: UIImageView!
-var complete: Bool!
-var completeButton: UIButton!
-override func layoutSubviews() {
+Able to pull from storage add dispatch to wait for url then upload to base.
 
-theImage.frame = CGRect(x: 5, y: 5, width: frame.width * 0.3, height: frame.height-10)
-theImage.contentMode = .scaleAspectFit
-name.frame = CGRect(x: frame.width * 0.3 + 20, y: frame.height/2-20, width: frame.width/2, height: 40)
+change saved to diet!
 
-if(complete == nil)
+
+@objc func imagePicker()
 {
-complete = false
+picker.delegate = self
+picker.allowsEditing = false
+picker.sourceType = .photoLibrary
+self.present(picker, animated: true, completion: nil)
+}
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+if let theimage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+{
+print("IT WORKED")
+//self.tempImage = theimage
+self.tempImages[currentCell] = theimage
+donePressed()
+previewImage(previewImage: theimage)
 }
 
-completeButton = UIButton(frame: CGRect(x: frame.width-50, y: frame.height/2-25, width: 50, height: 50))
-if(complete)
-{
-completeButton.setImage(#imageLiteral(resourceName: "checkMark"), for: .normal)
-}
-else
-{
-completeButton.setImage(#imageLiteral(resourceName: "xMark"), for: .normal)
-}
-completeButton.backgroundColor = .clear
-completeButton.addTarget(self, action:#selector(self.completeButtonPressed), for: .touchUpInside)
-self.addSubview(completeButton)
+
+self.picker.dismiss(animated: true, completion: nil)
+cellImageCtr = 0
+self.workoutCV.reloadData()
+
 
 }
-@objc func completeButtonPressed()
-{
-completeButton.removeFromSuperview()
-print("Tap Recognized")
-if(complete)
-{
-complete = false
 
-completeButton.setImage(#imageLiteral(resourceName: "xMark"), for: .normal)
-}
-else
-{
-completeButton.setImage(#imageLiteral(resourceName: "checkMark"), for: .normal)
-complete = true
-}
-self.addSubview(completeButton)
-}
-}
+let imageButton = UIButton(frame: CGRect(x: 40, y: 10, width: theView.bounds.width-80, height: theView.bounds.height/2))
+imageButton.backgroundColor = .clear
+imageButton.addTarget(self, action:#selector(self.imagePicker), for: .touchUpInside)
+theView.addSubview(imageButton)

@@ -21,14 +21,12 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
     var tempLabels = [String]()
     var currentCell = Int()
     var cellImageCtr = 0
-    
+    var inView = false
    
     @IBOutlet weak var workoutCV: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        checkLogin()
-        //logOutNow()
         workoutCV.delegate = self
         workoutCV.dataSource = self
         cellImageCtr = 0
@@ -45,6 +43,7 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         view.addGestureRecognizer(doubleTap)
         
         singleTap.require(toFail: doubleTap)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,6 +66,7 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         cell.nanme.adjustsFontSizeToFitWidth = true
         
         
+        
         workouts.append(cell)
         cellImageCtr+=1
         return cell
@@ -75,7 +75,7 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
     {
         print("SizeForItenAt")
         
-        return CGSize(width: workoutCV.bounds.width * 0.3, height: workoutCV.bounds.height * 0.3)
+        return CGSize(width: workoutCV.bounds.width * 0.325, height: workoutCV.bounds.height * 0.31)
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         print("NumberOfSections")
@@ -86,45 +86,31 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         self.currentCell = getLocatation(path: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }*/
+    
     
     override func viewDidLayoutSubviews() {
  
         //let height = bottomLayoutGuide.length
         if let test = self.tabBarController?.tabBar.frame.height
         {
+            print(test)
             workoutCV.frame = CGRect(x: 0.0, y: 0.0,width: view.bounds.width, height: view.bounds.height-test)
+            workoutCV.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         }
         
+        
+        let layout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        workoutCV.collectionViewLayout = layout
         //workoutCV.frame = CGRect(x: 0.0, y: 0.0,width: view.bounds.width, height: view.bounds.height-height)
     }
     
-    @objc func imagePicker()
-    {
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
-        self.present(picker, animated: true, completion: nil)
-    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let theimage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        {
-            print("IT WORKED")
-            //self.tempImage = theimage
-            self.tempImages[currentCell] = theimage
-            donePressed()
-            previewImage(previewImage: theimage)
-        }
-       
-      
-        self.picker.dismiss(animated: true, completion: nil)
-        cellImageCtr = 0
-        self.workoutCV.reloadData()
-       
-        
-    }
+    
     
     func populateTempCells()
     {
@@ -161,8 +147,8 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         tempLabels.append("Progress")
         tempImages[7] = #imageLiteral(resourceName: "progress2")
         //8
-        tempLabels.append("Saved")
-        tempImages[8] = #imageLiteral(resourceName: "saved")
+        tempLabels.append("Diet")
+        tempImages[8] = #imageLiteral(resourceName: "diet")
     }
 
     func getLocatation(path: IndexPath)->Int
@@ -184,28 +170,36 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
     }
     @objc func singleTapAction(_ sender: Any)
     {
+        if(inView==false)
+        {
         print("Single tap!")
         let tbvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "workoutsTB") as! workoutsTableView
         tbvc.nameOfGroup = tempLabels[currentCell]
         self.present(tbvc, animated: false, completion: nil)
+        }
     }
+    
     @objc func doubleTapAction(_ sender: Any)
     {
+        if(inView==false)
+        {
         print("Double tap tap!")
         previewImage(previewImage: tempImages[currentCell])
+        inView = true
+        }
     }
     
     func previewImage(previewImage: UIImage)
     {
-        donePressed()
+        //donePressed()
         let theView = UIView(frame: CGRect(x: 20, y: 100, width: workoutCV.bounds.width-40, height: workoutCV.bounds.height-200))
-        theView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1).withAlphaComponent(0.8)
+        theView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.8)
         theView.layer.cornerRadius = 30
         
         let rect = UIView(frame: CGRect(x: 0, y: 0, width: theView.frame.width, height: theView.frame.height))
         rect.backgroundColor = .clear
         rect.layer.borderWidth = 4
-        rect.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        rect.layer.borderColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         rect.layer.cornerRadius = 30
         theView.addSubview(rect)
         
@@ -216,15 +210,9 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         //theimage.clipsToBounds = true
         theView.addSubview(theimage)
         
-        let imageButton = UIButton(frame: CGRect(x: 40, y: 10, width: theView.bounds.width-80, height: theView.bounds.height/2))
-        imageButton.backgroundColor = .clear
-        imageButton.addTarget(self, action:#selector(self.imagePicker), for: .touchUpInside)
-        theView.addSubview(imageButton)
-        
         let nameTextField =  UITextField(frame: CGRect(x: 60, y: theView.bounds.height/2+50, width: theView.bounds.width-120, height: 30))
         nameTextField.text = tempLabels[currentCell]
         nameTextField.font = UIFont.systemFont(ofSize: 15)
-        //nameTextField.borderStyle = UITextField.BorderStyle.roundedRect
         nameTextField.autocorrectionType = UITextAutocorrectionType.no
         nameTextField.keyboardType = UIKeyboardType.default
         nameTextField.returnKeyType = UIReturnKeyType.done
@@ -236,6 +224,7 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         nameTextField.layer.borderWidth = 2
         nameTextField.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         nameTextField.textAlignment = .center
+        nameTextField.isEnabled = false
         theView.addSubview(nameTextField)
         
         let doneButton = UIButton(frame: CGRect(x: theView.bounds.width/2-50, y: theView.bounds.height-100, width: 100, height: 60))
@@ -256,16 +245,6 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         
         
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        
-        textField.resignFirstResponder()
-        let newText = textField.text!
-        tempLabels[currentCell] = newText
-        cellImageCtr = 0
-        workoutCV.reloadData()
-        return true
-    }
     @objc func donePressed()
     {
         print("DonePressed")
@@ -278,30 +257,9 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
                 subview.removeFromSuperview()
             }
         }
+        self.inView = false
     }
     
-    func checkLogin()
-    {
-        if Auth.auth().currentUser?.uid == nil
-        {
-            logOutNow()
-            
-        }
-        
-        
-    }
-    func logOutNow()
-    {
-        do {
-            try Auth.auth().signOut()
-        }catch let loginErorr{
-            print(loginErorr)
-        }
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginvc")
-        self.present(vc, animated: true, completion: nil)
-        
-        
-    }
     
 }
 

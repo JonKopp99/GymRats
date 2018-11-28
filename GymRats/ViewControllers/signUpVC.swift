@@ -15,11 +15,13 @@ class signUpVC: UIViewController, UITextFieldDelegate {
     var passwordTextField: UITextField!
     var conpasswordTextField: UITextField!
     var ref: DatabaseReference!
-    //var userStorage: StorageReference!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         ref = Database.database().reference()
+
     }
     
     
@@ -147,9 +149,9 @@ class signUpVC: UIViewController, UITextFieldDelegate {
                     
                     let userID = Auth.auth().currentUser!.uid
                     
-                        let userInfo: [String : Any] = ["uid" : userID,"full name" : self.nameTextField.text!]
-                                                       
+                        let userInfo: [String : Any] = ["uid" : userID,"username" : self.nameTextField.text!]
                     self.ref.child("users").child(userID).setValue(userInfo)
+                    self.addDefaultWorkouts(uid: userID)
                     
                                 
                     let tabbar:UIViewController = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
@@ -173,7 +175,90 @@ class signUpVC: UIViewController, UITextFieldDelegate {
         print("Login Pressed")
         self.present(viewController, animated: false, completion: nil)
     }
+    func addDefaultWorkouts(uid: String)
+    {
+        //let userWorkouts: [String] = ["Chest","Back","Legs","Shoulders","Biceps","Triceps","Core","Progess","Saved"]
+        //self.ref.child("users").child(uid).child("Workouts").setValue(userWorkouts)
+        //Chest
+        var work = Workouts()
+        work.name = "Flat Bench"
+        work.desc = "Push bar up from chest."
+        work.uploadToBase(theName: "Chest", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Back
+        work.name = "Lat Pulldown"
+        work.desc = "Pull bar down to chest."
+        work.uploadToBase(theName: "Back", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Legs
+        work.name = "Squat"
+        work.desc = "ASS to the grass"
+        work.uploadToBase(theName: "Legs", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Shoulders
+        work.name = "Military Press"
+        work.desc = "Stand up and push dumbells over your head!"
+        work.uploadToBase(theName: "Shoulders", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Biceps
+        work.name = "Curls"
+        work.desc = "Curl them dumbells!!!"
+        work.uploadToBase(theName: "Biceps", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Triceps
+        work.name = "Tricep Extension"
+        work.desc = "Extend them triceps BOY!!!"
+        work.uploadToBase(theName: "Triceps", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Core
+        work.name = "Sit Ups"
+        work.desc = "Everyone knows what sit ups are!"
+        work.uploadToBase(theName: "Core", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Progress
+        work.name = "My Progress"
+        work.desc = "Post pics of your progression!"
+        work.uploadToBase(theName: "Progress", uid: uid, img: #imageLiteral(resourceName: "chestHightlighted"))
+        //Saved
+        work.name = "Beef and Chicken"
+        work.desc = "A weird but beautiful combo"
+        work.uploadToBase(theName: "Diet", uid: uid, img: #imageLiteral(resourceName: "diet"))
+        
+    }
     
     
 }
 
+struct Workouts{
+    
+    var name: String!
+    var desc: String!
+    
+    func uploadToBase(theName: String, uid: String, img: UIImage)
+    {
+
+        let text2 = name.removeChars(from: name)
+        let ref = Database.database().reference().child("users").child(uid).child("Workouts").child(theName).child(text2)
+        
+       let storage = Storage.storage().reference().child("users").child(uid).child("images").child(text2)
+     
+        
+        //let thedata = img.jpegData(compressionQuality: 0.5)
+        let thedata = img.pngData()
+        
+        storage.putData(thedata!, metadata: nil, completion: {(metadat, err) in
+            print("putData Completed")
+            if let error = err {
+                print("Error in putdata\(error.localizedDescription)")
+            }
+            storage.downloadURL(completion: {(url, error) in
+                if let urly = url?.absoluteString {
+                    
+                    let toUpload: [String: Any] = ["Name" : self.name, "Description" : self.desc, "url" : urly, "completion" : false]
+                    ref.setValue(toUpload)
+                    print("Download Url Completed")
+                }
+                    if error != nil{
+                        print("Error in downloadURL\(error!.localizedDescription)")
+                    }
+            
+            
+            
+        })
+            
+        })
+    }
+}

@@ -106,7 +106,7 @@
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="vOk-kG-zv2"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Workouts" id="vi1-rQ-6cM"/>
+                    <tabBarItem key="tabBarItem" title="" image="dumBell" id="vi1-rQ-6cM"/>
                     <navigationItem key="navigationItem" title="Workouts" id="V63-kN-VSy"/>
                     <connections>
                         <outlet property="workoutCV" destination="F34-2m-Myw" id="J69-iw-RPc"/>
@@ -177,12 +177,13 @@
         <!--Tab Bar Controller-->
         <scene sceneID="qRY-3K-fdg">
             <objects>
-                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="UzY-7E-T5J" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="UzY-7E-T5J" customClass="tabBarController" customModule="GymRats" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hga-wx-6n6">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.090296593770000003" green="0.456161131" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="brU-I8-HwH" kind="relationship" relationship="viewControllers" id="DPQ-Gl-teK"/>
@@ -193,7 +194,7 @@
             </objects>
             <point key="canvasLocation" x="2220" y="18"/>
         </scene>
-        <!--Other-->
+        <!--View Controller-->
         <scene sceneID="h2P-TB-5tb">
             <objects>
                 <viewController id="zHQ-Mh-3Bi" sceneMemberID="viewController">
@@ -203,13 +204,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="vFc-Tx-KF4"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Other" id="zz1-mq-Aqx">
-                        <color key="badgeColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="search_black" id="zz1-mq-Aqx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgb-aT-UJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2014" y="791"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dumBell" width="50" height="50"/>
+        <image name="search_black" width="26.25" height="26.25"/>
+    </resources>
 </document>

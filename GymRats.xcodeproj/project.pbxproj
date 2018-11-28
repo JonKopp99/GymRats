@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB11B022219C07C2009894A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB11B021219C07C1009894A8 /* GoogleService-Info.plist */; };
+		AB3F920521A6310800EB649A /* workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F920421A6310800EB649A /* workout.swift */; };
 		AB4F1D8D21924AF000597440 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1D8C21924AF000597440 /* AppDelegate.swift */; };
 		AB4F1D8F21924AF000597440 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1D8E21924AF000597440 /* ViewController.swift */; };
 		AB4F1D9221924AF000597440 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1D9021924AF000597440 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 		AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DAB21927E9900597440 /* workoutsCell.swift */; };
 		AB4F1DAF2192CEC400597440 /* toDo in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DAE2192CEC400597440 /* toDo */; };
 		AB4F1DB32197966100597440 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DB22197966100597440 /* assets.xcassets */; };
+		AB5C4579219D614A00D904C3 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C4578219D614A00D904C3 /* tabBarController.swift */; };
 		ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B02198F25200571DF1 /* workoutsTableView.swift */; };
 		ABB508B42198F30400571DF1 /* workoutsTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B32198F30400571DF1 /* workoutsTBCell.swift */; };
 		D647DE0F181999D900F4046C /* Pods_GymRats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */; };
@@ -29,6 +31,7 @@
 		45A09A162B554216BCCC5DD5 /* Pods-GymRats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymRats.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymRats/Pods-GymRats.debug.xcconfig"; sourceTree = "<group>"; };
 		926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymRats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB11B021219C07C1009894A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB3F920421A6310800EB649A /* workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workout.swift; sourceTree = "<group>"; };
 		AB4F1D8921924AF000597440 /* GymRats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymRats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB4F1D8C21924AF000597440 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB4F1D8E21924AF000597440 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		AB4F1DAB21927E9900597440 /* workoutsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsCell.swift; sourceTree = "<group>"; };
 		AB4F1DAE2192CEC400597440 /* toDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = toDo; sourceTree = "<group>"; };
 		AB4F1DB22197966100597440 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		AB5C4578219D614A00D904C3 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		ABB508B02198F25200571DF1 /* workoutsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTableView.swift; sourceTree = "<group>"; };
 		ABB508B32198F30400571DF1 /* workoutsTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTBCell.swift; sourceTree = "<group>"; };
 		BDE0BE5C80EDE8128A2F3BA3 /* Pods-GymRats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymRats.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymRats/Pods-GymRats.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				AB4F1DA621924B8A00597440 /* signUpVC.swift */,
 				AB4F1DA82192557600597440 /* workoutsVC.swift */,
 				ABB508B02198F25200571DF1 /* workoutsTableView.swift */,
+				AB5C4578219D614A00D904C3 /* tabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			children = (
 				AB4F1DAB21927E9900597440 /* workoutsCell.swift */,
 				ABB508B32198F30400571DF1 /* workoutsTBCell.swift */,
+				AB3F920421A6310800EB649A /* workout.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 				ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */,
 				AB4F1DA721924B8A00597440 /* signUpVC.swift in Sources */,
 				AB4F1D8F21924AF000597440 /* ViewController.swift in Sources */,
+				AB3F920521A6310800EB649A /* workout.swift in Sources */,
+				AB5C4579219D614A00D904C3 /* tabBarController.swift in Sources */,
 				AB4F1D8D21924AF000597440 /* AppDelegate.swift in Sources */,
 				AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */,
 				AB4F1DA321924B2000597440 /* Home.swift in Sources */,

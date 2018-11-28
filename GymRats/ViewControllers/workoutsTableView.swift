@@ -6,32 +6,50 @@
 //  Copyright © 2018 Jonathan Kopp. All rights reserved.
 //
 import UIKit
-class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
+import Firebase
+
+class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate{
     
     @IBOutlet var tableView: UITableView!
     
+    var workouts = [workout]()
     var nameOfGroup: String!
     var currentSelectedIndex: IndexPath!
+    let picker = UIImagePickerController()
+    var previewImage = UIImageView()
+    var previewimageButton = UIButton()
+    var previewnameTextField = UITextField()
+    var previewtextView = UITextView()
+    var keyboardHeight = CGFloat()
+    var inView = false
+    var inPicView = false
+    var editg = false
+    //var images = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        
+        loadCells()
         tableView.reloadData()
-        
-        
         let singleTap = UITapGestureRecognizer(target: self, action:#selector(self.singleTapAction(_:)))
         singleTap.numberOfTapsRequired = 1
-        view.addGestureRecognizer(singleTap)
+        tableView.addGestureRecognizer(singleTap)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action:#selector(self.doubleTapAction(_:)))
-        doubleTap.numberOfTapsRequired = 2
-        view.addGestureRecognizer(doubleTap)
         
-        singleTap.require(toFail: doubleTap)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
     override func viewDidLayoutSubviews() {
-        tableView.frame = CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height-160)
+        tableView.frame = CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height-80)
         tableView.backgroundColor = .white
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         let backButton = UIButton(frame: CGRect(x: 20, y: 40, width: 25, height: 25))
@@ -45,11 +63,8 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         navView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         navView.isOpaque = true
         
-        let addView = UIView(frame: CGRect(x: 0, y: view.bounds.height-80, width: view.bounds.width, height: 80))
-        addView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        addView.isOpaque = true
         
-        let addButton = UIButton(frame: CGRect(x: addView.frame.width/2-25, y: addView.frame.height/2-30, width: 50, height: 50))
+        let addButton = UIButton(frame: CGRect(x: navView.frame.width-65, y: 35, width: 35, height: 35))
         addButton.backgroundColor = .clear
         addButton.setImage(#imageLiteral(resourceName: "addButton"), for: .normal)
         addButton.addTarget(self, action:#selector(self.addPressed), for: .touchUpInside)
@@ -61,8 +76,7 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         
-        addView.addSubview(addButton)
-        view.addSubview(addView)
+        navView.addSubview(addButton)
         navView.addSubview(backButton)
         navView.addSubview(label)
         view.addSubview(navView)
@@ -71,21 +85,26 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return workouts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workoutsTBCELL", for: indexPath) as! workoutsTBCell
-        cell.theImage.image = #imageLiteral(resourceName: "SwoleMatesLogo copy")
-        cell.name.text = "Name"
+        cell.theImage.downloadImage(from: workouts[indexPath.row].imagePath)
+               
+        cell.name.text = workouts[indexPath.row].name
         cell.name.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         cell.name.font = UIFont(name: "AvenirNext-Bold", size: 25)
         //cell.name.textAlignment = .center
         cell.name.sizeToFit()
         cell.name.adjustsFontSizeToFitWidth = true
-       cell.completeImage.image = #imageLiteral(resourceName: "xMark")
-        cell.complete = false
+        cell.completeImage.image = #imageLiteral(resourceName: "xMark")
+        if(workouts[indexPath.row].completion)
+        {
+            cell.completeImage.image = #imageLiteral(resourceName: "checkMark")
+        }
+        
         
         return cell
     }
@@ -94,10 +113,20 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        print(indexPath)
+        print("DID select ROW")
         currentSelectedIndex = indexPath
 
         //tableView.reloadRows(at: [indexPath], with: .fade)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            self.workouts.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
     @objc func backPressed()
@@ -108,34 +137,91 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @objc func singleTapAction(_ sender: UITapGestureRecognizer)
     {
-        let loc = sender.location(in: tableView)
-        if loc.y >= 0
+        if(inView)
         {
-        let cell = tableView.cellForRow(at: currentSelectedIndex) as! workoutsTBCell
-        if(cell.complete==false)
+            return
+        }
+        if(inPicView)
         {
-            cell.complete = true
-            cell.completeImage.image = #imageLiteral(resourceName: "checkMark")
+            return
+        }
+        let tapLoc = sender.location(in: self.view)
+        if let index  = self.tableView.indexPathForRow(at: tapLoc)
+        {
+            self.currentSelectedIndex = index
         }
         else
         {
-            cell.complete = false
-            cell.completeImage.image = #imageLiteral(resourceName: "xMark")
+            return
         }
-        }
-    }
-    @objc func doubleTapAction(_ sender: UITapGestureRecognizer)
-    {
-        let loc = sender.location(in: tableView)
-        if loc.y >= 0
+        print(currentSelectedIndex)
+        print(tapLoc)
+        //let loc = sender.location(in: tableView)
+        if (tapLoc.x>=(tableView.bounds.width-100))
         {
-        viewWorkout()
+            
+            if(currentSelectedIndex == nil)
+            {
+                return
+            }
+            
+            print(currentSelectedIndex.section)
+            
+            if(tableView.numberOfSections-1 <= currentSelectedIndex.section){
+                
+            setCompletion(theWorkout: currentSelectedIndex.section)
+            }
+        else{
+            return
+        }
+            
+        }
+        else{
+            inView = true
+            viewWorkout()
         }
     }
     
+    
+    func setCompletion(theWorkout: Int)
+    {
+        let cell = tableView.cellForRow(at: currentSelectedIndex) as! workoutsTBCell
+        let comp = workouts[theWorkout].completion!
+        let uid = Auth.auth().currentUser?.uid
+        if(uid == nil)
+        {
+            perform(#selector(logOutNow),with: nil, afterDelay: 0)
+        }
+        let thename = workouts[theWorkout].name
+        let nameOfDir = thename?.removeChars(from: thename)
+        
+        let ref = Database.database().reference().child("users").child(uid!).child("Workouts").child(nameOfGroup).child(nameOfDir!)
+        
+        if(comp)
+        {
+            workouts[theWorkout].completion = false
+            cell.complete = false
+            cell.completeImage.image = #imageLiteral(resourceName: "xMark")
+            ref.updateChildValues(["completion": false])
+            
+        }
+        else
+        {
+           workouts[theWorkout].completion = true
+            cell.complete = true
+            cell.completeImage.image = #imageLiteral(resourceName: "checkMark")
+            ref.updateChildValues(["completion": true])
+        }
+        
+        
+    }
+    
+    
     func viewWorkout()
     {
-        let theView = UIView(frame: CGRect(x: 20, y: 100, width: tableView.bounds.width-40, height: tableView.bounds.height-100))
+        inView = true
+        
+        let theView = UIView(frame: CGRect(x: 20, y: tableView.frame.minY+5, width: tableView.bounds.width-40, height: tableView.bounds.height-10))
         theView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).withAlphaComponent(0.8)
         theView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1).withAlphaComponent(0.8)
         theView.layer.cornerRadius = 30
@@ -147,7 +233,11 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         rect.layer.cornerRadius = 30
         theView.addSubview(rect)
         
-        let theimage = UIImageView(image: #imageLiteral(resourceName: "SwoleMatesLogo copy"))
+        
+        let cell = self.tableView.cellForRow(at: currentSelectedIndex) as! workoutsTBCell
+        let theimage = UIImageView()
+        theimage.image = cell.theImage.image
+
         theimage.frame = CGRect(x: 40, y: 10, width: theView.bounds.width-80, height: theView.bounds.height/2)
         theimage.contentMode = .scaleAspectFit
         theimage.layer.cornerRadius = 30
@@ -156,23 +246,39 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let imageButton = UIButton(frame: CGRect(x: 40, y: 10, width: theView.bounds.width-80, height: theView.bounds.height/2))
         imageButton.backgroundColor = .clear
-        //imageButton.addTarget(self, action:#selector(self.imagePicker), for: .touchUpInside)
+        imageButton.addTarget(self, action:#selector(self.imageViewPressed), for: .touchUpInside)
         theView.addSubview(imageButton)
+        let nameTextField =  UITextField(frame: CGRect(x: 60, y:theimage.bounds.height + 15, width: theView.bounds.width-120, height: 30))
+        nameTextField.text = workouts[currentSelectedIndex.row].name
+        nameTextField.font = UIFont.systemFont(ofSize: 15)
+        nameTextField.autocorrectionType = UITextAutocorrectionType.no
+        nameTextField.keyboardType = UIKeyboardType.default
+        nameTextField.returnKeyType = UIReturnKeyType.done
+        nameTextField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        nameTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        nameTextField.delegate = self
+        nameTextField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        nameTextField.layer.cornerRadius = 10
+        nameTextField.layer.borderWidth = 2
+        nameTextField.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        nameTextField.textAlignment = .center
+        nameTextField.isEnabled = false
+        theView.addSubview(nameTextField)
         
-        let textView = UITextView(frame: CGRect(x: 10, y: theimage.bounds.height+10, width: theView.bounds.width-20, height: theView.bounds.height * 0.3))
+        let textView = UITextView(frame: CGRect(x: 10, y: theimage.bounds.height+50, width: theView.bounds.width-20, height: theView.bounds.height * 0.3))
+        textView.text = workouts[currentSelectedIndex.row].description
         textView.textAlignment = NSTextAlignment.justified
         textView.backgroundColor = .white
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.textColor = UIColor.black
         textView.font = UIFont.boldSystemFont(ofSize: 20)
         textView.font = UIFont(name: "Verdana", size: 17)
-        textView.autocapitalizationType = UITextAutocapitalizationType.allCharacters
         textView.isSelectable = true
         textView.dataDetectorTypes = UIDataDetectorTypes.link
         textView.layer.cornerRadius = 10
         textView.autocorrectionType = UITextAutocorrectionType.yes
         textView.spellCheckingType = UITextSpellCheckingType.yes
-        textView.isEditable = true
+        textView.isEditable = false
         textView.keyboardType = UIKeyboardType.default
         textView.returnKeyType = UIReturnKeyType.done
         textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -184,26 +290,244 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
   
-        let doneButton = UIButton(frame: CGRect(x: theView.bounds.width/2-50, y: theView.bounds.height-80, width: 100, height: 60))
+        let doneButton = UIButton(frame: CGRect(x: 10, y: theView.bounds.height-50, width: theView.bounds.width/2-20, height: 35))
         doneButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         doneButton.titleLabel?.font = UIFont(name: "AvenirNext", size: 30.0)
-        doneButton.setTitle("Done", for: .normal)
+        doneButton.setTitle("Close", for: .normal)
         doneButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
         doneButton.addTarget(self, action:#selector(self.donePressed), for: .touchUpInside)
         doneButton.layer.cornerRadius = 10
         doneButton.layer.borderWidth = 2
         doneButton.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         
+        let editButton = UIButton(frame: CGRect(x: theView.bounds.width/2+10, y: theView.bounds.height-50, width: theView.bounds.width/2-20, height: 35))
+        editButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        editButton.titleLabel?.font = UIFont(name: "AvenirNext", size: 30.0)
+        editButton.setTitle("Edit", for: .normal)
+        editButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
+        editButton.addTarget(self, action:#selector(self.editPressed), for: .touchUpInside)
+        editButton.layer.cornerRadius = 10
+        editButton.layer.borderWidth = 2
+        editButton.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        
         theView.addSubview(doneButton)
+        theView.addSubview(editButton)
         
         
         
         view.addSubview(theView)
     }
+    
+    @objc func editPressed()
+    {
+        donePressed()
+        inView = true
+        editg = true
+        
+        
+        addWorkout()
+    }
+    
+    func addWorkout()
+    {
+        var cell = workoutsTBCell()
+        if editg
+        {
+            cell = self.tableView.cellForRow(at: currentSelectedIndex) as! workoutsTBCell
+        }
+        let theView = UIView(frame: CGRect(x: 20, y: tableView.frame.minY+5, width: tableView.bounds.width-40, height: tableView.bounds.height-10))
+        theView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).withAlphaComponent(0.8)
+        theView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1).withAlphaComponent(0.8)
+        theView.layer.cornerRadius = 30
+        
+        let rect = UIView(frame: CGRect(x: 0, y: 0, width: theView.frame.width, height: theView.frame.height))
+        rect.backgroundColor = .clear
+        rect.layer.borderWidth = 4
+        rect.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        rect.layer.cornerRadius = 30
+        
+        //let label = UILabel(frame: CGRect(x: 40, y: 10, width: theView.bounds.width-80, height: theView.bounds.height/2))
+        previewImage.frame = CGRect(x: theView.bounds.minX+10, y: theView.bounds.minY+10, width: 100, height: 100)
+        previewImage.contentMode = .scaleAspectFit
+        previewImage.layer.cornerRadius = 20
+        
+        
+        
+        previewimageButton = UIButton(frame: CGRect(x: theView.bounds.minX+10, y: theView.bounds.minY+10, width: 100, height: 100))
+        previewimageButton.backgroundColor = .clear
+        
+        previewimageButton.setTitle("Select Image", for: .normal)
+        
+        previewimageButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        previewimageButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        previewimageButton.addTarget(self, action:#selector(self.imagePicker), for: .touchUpInside)
+        
+        
+        let widthOfName = (theView.bounds.width - previewImage.frame.maxX) - 15
+        previewnameTextField =  UITextField(frame: CGRect(x: previewImage.bounds.width+10, y:previewImage.bounds.height/2-5, width: widthOfName, height: 30))
+        previewnameTextField.placeholder = "Enter name of the workout!"
+        if(editg)
+        {
+            previewnameTextField.placeholder = ""
+            previewnameTextField.isEnabled = false
+        }
+        previewnameTextField.font = UIFont.systemFont(ofSize: 15)
+        previewnameTextField.autocorrectionType = UITextAutocorrectionType.no
+        previewnameTextField.keyboardType = UIKeyboardType.default
+        previewnameTextField.returnKeyType = UIReturnKeyType.done
+        previewnameTextField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        previewnameTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        previewnameTextField.delegate = self
+        previewnameTextField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        previewnameTextField.layer.cornerRadius = 10
+        previewnameTextField.layer.borderWidth = 2
+        previewnameTextField.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        previewnameTextField.textAlignment = .center
+        
+        
+        
+        previewtextView  = UITextView(frame: CGRect(x: 10, y: previewImage.bounds.height+10, width: theView.bounds.width-20, height: theView.bounds.height * 0.3))
+        previewtextView.textAlignment = NSTextAlignment.justified
+        previewtextView.backgroundColor = .white
+        previewtextView.font = UIFont.systemFont(ofSize: 20)
+        previewtextView.textColor = UIColor.black
+        previewtextView.font = UIFont.boldSystemFont(ofSize: 20)
+        previewtextView.font = UIFont(name: "Verdana", size: 17)
+        previewtextView.isSelectable = true
+        previewtextView.dataDetectorTypes = UIDataDetectorTypes.link
+        previewtextView.layer.cornerRadius = 10
+        previewtextView.autocorrectionType = .no
+        previewtextView.spellCheckingType = UITextSpellCheckingType.yes
+        previewtextView.isEditable = true
+        previewtextView.keyboardType = UIKeyboardType.default
+        
+        previewtextView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        previewtextView.layer.cornerRadius = 10
+        previewtextView.layer.borderWidth = 2
+        previewtextView.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        
+        
+        
+        var ypos = theView.bounds.height-50
+        if(keyboardHeight>0)
+        {
+            ypos = theView.bounds.height-keyboardHeight
+        }
+        
+        let closeButton = UIButton(frame: CGRect(x: 10, y: ypos-30, width: theView.bounds.width/2-20, height: 30))
+        closeButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        closeButton.titleLabel?.font = UIFont(name: "AvenirNext", size: 30.0)
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
+        closeButton.addTarget(self, action:#selector(self.donePressed), for: .touchUpInside)
+        closeButton.layer.cornerRadius = 10
+        closeButton.layer.borderWidth = 2
+        closeButton.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        
+        let doneButton = UIButton(frame: CGRect(x: theView.bounds.width/2+10, y: ypos-30, width: theView.bounds.width/2-20, height: 35))
+        doneButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        doneButton.titleLabel?.font = UIFont(name: "AvenirNext", size: 30.0)
+        doneButton.setTitle("Add", for: .normal)
+        doneButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
+        doneButton.addTarget(self, action:#selector(self.addWorkoutPressed), for: .touchUpInside)
+        doneButton.layer.cornerRadius = 10
+        doneButton.layer.borderWidth = 2
+        doneButton.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        
+        if(editg)
+        {
+            previewimageButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            previewimageButton.setTitle("Change Image?", for: .normal)
+            previewImage.image = cell.theImage.image
+            previewnameTextField.text = cell.name.text
+            previewtextView.text = workouts[currentSelectedIndex.row].description
+            
+        }
+        
+        theView.addSubview(rect)
+        theView.addSubview(previewImage)
+        theView.addSubview(previewimageButton)
+        theView.addSubview(previewnameTextField)
+        theView.addSubview(previewtextView)
+        theView.addSubview(closeButton)
+        theView.addSubview(doneButton)
+        view.addSubview(theView)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        //print("There has been a touch!")
+        //let touch = touches.first!
+        //let location = touch.location(in: self.tableView)
+        //print("X: \(location.x)")
+        //print("Y: \(location.y)")
+        
+        
+        
+        super.touchesBegan(touches,  with: event)
+    }
+
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    @objc func imageViewPressed()
+    {
+        //donePressed()
+        inPicView = true
+        print("ImageViewPResed")
+        let cell = tableView.cellForRow(at: currentSelectedIndex) as! workoutsTBCell
+        let tbFrame = CGRect(x: 0, y: 80, width: tableView.bounds.width, height: tableView.bounds.height)
+        let theFrame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        let backgroundView = UIView(frame: theFrame)
+        backgroundView.backgroundColor = .white
+        
+        let doneButton = UIButton(frame: theFrame)
+        doneButton.backgroundColor = .clear
+        doneButton.addTarget(self, action:#selector(self.donePressed), for: .touchUpInside)
+        
+        let imageView = UIImageView()
+        //imageView.downloadImage(from: workouts[currentSelectedIndex.row].imagePath)
+        imageView.image = cell.theImage.image
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = tbFrame
+        
+        
+        backgroundView.addSubview(imageView)
+        self.view.addSubview(backgroundView)
+        self.view.addSubview(doneButton)
+    }
+    
+    @objc func imagePicker()
+    {
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let theimage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            print("IT WORKED")
+           
+            previewImage.image = theimage
+            self.previewimageButton.setTitle("", for: .normal)
+        }
+        
+        
+        self.picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @objc func addPressed()
     {
-        viewWorkout()
+        addWorkout()
+        inView = true
     }
+    
+    
     @objc func donePressed()
     {
         print("DonePressed")
@@ -216,9 +540,192 @@ class workoutsTableView: UIViewController, UITableViewDelegate, UITableViewDataS
                 subview.removeFromSuperview()
             }
         }
+        previewImage = UIImageView()
+        inView = false
+        inPicView = false
+    }
+    
+    @objc func addWorkoutPressed()//theName: String, uid: String, img: UIImage
+    {
+        if(editg)
+        {
+            workouts.remove(at: self.currentSelectedIndex.row)
+            tableView.deleteRows(at: [self.currentSelectedIndex], with: .automatic)
+        }
+        let uid = Auth.auth().currentUser?.uid
+        if(uid == nil)
+        {
+            perform(#selector(logOutNow),with: nil, afterDelay: 0)
+        }
+        let theName = previewnameTextField.text!
+        let img = previewImage.image!
+        let desc = previewtextView.text!
+        
+        print("addWorkoutPressed")
+        
+        let dir = nameOfGroup.removeChars(from: nameOfGroup)
+        let dirWorkout = theName.removeChars(from: theName)
+        let ref = Database.database().reference().child("users").child(uid!).child("Workouts").child(dir).child(dirWorkout)
+        
+        let storage = Storage.storage().reference().child("users").child(uid!).child("images").child(dirWorkout)
+        
+        let wo = workout()
+        //let thedata = img.jpegData(compressionQuality: 0.5)
+        let thedata = img.jpegData(compressionQuality: 0.1)
+        
+        storage.putData(thedata!, metadata: nil, completion: {(metadat, err) in
+            print("putData Completed")
+            if let error = err {
+                print("Error in putdata\(error.localizedDescription)")
+            }
+            storage.downloadURL(completion: {(url, error) in
+                if let urly = url?.absoluteString {
+                    
+                    let toUpload: [String: Any] = ["Name" : theName, "Description" : desc, "url" : urly, "completion" : false]
+                    ref.setValue(toUpload)
+                    print("Download Url Completed")
+                    wo.completion = false; wo.description = desc; wo.imagePath = urly; wo.name = theName
+                    self.workouts.append(wo)
+                    self.tableView.reloadData()
+                }
+                if error != nil{
+                    print("Error in downloadURL\(error!.localizedDescription)")
+                }
+                
+                
+                
+            })
+            self.editg = false
+        })
+        
+        
+        
+        
+        
+        
+        
+        for subview in self.view.subviews {
+            if subview is UITableView || subview is UITableViewCell
+            {
+                print("Almost")
+            }
+            else{
+                subview.removeFromSuperview()
+            }
+        }
+        inView = false
+        previewImage = UIImageView()
     }
     
     
+    func loadCells()
+    {
+        let uid = Auth.auth().currentUser?.uid
+        if(uid == nil)
+        {
+            perform(#selector(logOutNow),with: nil, afterDelay: 0)
+        }
+        let ref = Database.database().reference().child("users").child(uid!).child("Workouts").child(nameOfGroup)
+        ref.queryOrderedByValue()
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            
+            if !snapshot.exists() { return }
+            let test = snapshot.value as! [String : AnyObject]
+            for(_, value) in test {
+                
+                let wo = workout()
+                
+                if let name = value["Name"] as? String{
+                    
+                    wo.name = name
+                    print(wo.name)
+                   
+                }
+                if let desc = value["Description"] as? String {
+                    
+                    wo.description = desc
+                    print(wo.description)
+                }
+                if let url = value["url"] as? String{
+                    wo.imagePath = url
+                    print(wo.imagePath)
+                }
+                if let completion = value["completion"] as? Bool{
+                    
+                    wo.completion = completion
+                    print(wo.completion)
+                }
+                self.workouts.append(wo)
+                self.tableView.reloadData()
+            }
+        })
+        tableView.reloadData()
     }
+    
+    
+    @objc func logOutNow()
+    {
+        do {
+            try Auth.auth().signOut()
+        }catch let loginErorr{
+            print(loginErorr)
+        }
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginvc")
+        self.present(vc, animated: true, completion: nil)
+        
+        
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            print(keyboardHeight)
+            previewtextView.frame = CGRect(x: previewtextView.frame.minX, y: previewtextView.frame.minY, width: previewtextView.bounds.width, height: keyboardHeight)
+        }
+    }
+    
+    }
+
+extension UIImageView {
+    func downloadImage(from imgURL: String!)
+    {
+        let url = URLRequest(url: URL(string: imgURL)!)
+        let task = URLSession.shared.dataTask(with: url){
+            (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data!)
+            }
+            
+        }
+        task.resume()
+    }
+}
+
+extension NSString{
+    func removeChars(from theString: String!)->String
+    {
+        var newString = theString.replacingOccurrences(of: " ",with: "")
+        newString = newString.replacingOccurrences(of: " ",with: "")
+        newString = newString.replacingOccurrences(of: ".", with: "")
+        newString = newString.replacingOccurrences(of: "#", with: "")
+        newString = newString.replacingOccurrences(of: "$", with: "")
+        newString = newString.replacingOccurrences(of: "[", with: "")
+        newString = newString.replacingOccurrences(of: "]", with: "")
+        newString = newString.replacingOccurrences(of: "-", with: "")
+        
+        
+        return newString
+    }
+    
+    
+}
+
 
 
