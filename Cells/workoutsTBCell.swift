@@ -24,7 +24,7 @@ class workoutsTBCell: UITableViewCell {
     override func layoutSubviews() {
         
         theImage.frame = CGRect(x: 5, y: 5, width: frame.width * 0.3, height: frame.height-10)
-        theImage.contentMode = .scaleAspectFit
+        theImage.contentMode = .scaleToFill
         name.frame = CGRect(x: frame.width * 0.3 + 20, y: frame.height/2-20, width: frame.width/2, height: 40)
         completeImage.frame = CGRect(x: frame.width-60, y: frame.height/2-25, width: 50, height: 50)
         

@@ -1,18 +1,21 @@
 //
-//  workout.swift
+//  searchOBJ.swift
 //  GymRats
 //
-//  Created by Jonathan Kopp on 11/21/18.
+//  Created by Jonathan Kopp on 12/5/18.
 //  Copyright © 2018 Jonathan Kopp. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class workout{
+class searchOBJ
+{
     var name: String!
-    var description: String!
+    var uid: String!
     var imagePath: String!
-    var completion: Bool!
+    var img = UIImageView()
+    
+    
     
 }

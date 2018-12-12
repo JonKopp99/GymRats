@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
     
     
     @IBOutlet var tabBar: UITabBarItem!
     
+    var navcontroller = UINavigationController()
     var workouts = [workoutsCell]()
     let picker = UIImagePickerController()
     var tempImage = UIImage()
@@ -93,12 +95,11 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
     
     override func viewDidLayoutSubviews() {
  
-        //let height = bottomLayoutGuide.length
         if let test = self.tabBarController?.tabBar.frame.height
         {
             print(test)
             workoutCV.frame = CGRect(x: 0.0, y: 0.0,width: view.bounds.width, height: view.bounds.height-test)
-            workoutCV.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+            workoutCV.backgroundColor = .white
         }
         
         
@@ -174,10 +175,14 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         {
         print("Single tap!")
         let tbvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "workoutsTB") as! workoutsTableView
+            tbvc.modalTransitionStyle = .crossDissolve
         tbvc.nameOfGroup = tempLabels[currentCell]
-        self.present(tbvc, animated: false, completion: nil)
+        self.present(tbvc, animated: true, completion: nil)
+            
         }
     }
+    
+    
     
     @objc func doubleTapAction(_ sender: Any)
     {
@@ -191,11 +196,10 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
     
     func previewImage(previewImage: UIImage)
     {
-        //donePressed()
-        let theView = UIView(frame: CGRect(x: 20, y: 100, width: workoutCV.bounds.width-40, height: workoutCV.bounds.height-200))
-        theView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.8)
+        let theView = UIView(frame: CGRect(x: 20, y: view.bounds.height, width: workoutCV.bounds.width-40, height: workoutCV.bounds.height-200))
+        theView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.8)
         theView.layer.cornerRadius = 30
-        
+        theView.alpha = 0
         let rect = UIView(frame: CGRect(x: 0, y: 0, width: theView.frame.width, height: theView.frame.height))
         rect.backgroundColor = .clear
         rect.layer.borderWidth = 4
@@ -230,7 +234,7 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         let doneButton = UIButton(frame: CGRect(x: theView.bounds.width/2-50, y: theView.bounds.height-100, width: 100, height: 60))
         doneButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         doneButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 30.0)
-        doneButton.setTitle("Done", for: .normal)
+        doneButton.setTitle("Close", for: .normal)
         doneButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
         doneButton.addTarget(self, action:#selector(self.donePressed), for: .touchUpInside)
         doneButton.layer.cornerRadius = 10
@@ -240,11 +244,20 @@ class workoutsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDe
         
         
         
-        view.addSubview(theView)
+        self.view.addSubview(theView)
         
         
+        UIView.animate(withDuration: 0.3, animations: {
+            theView.frame = CGRect(x: 20, y: 100, width: self.workoutCV.bounds.width-40, height: self.workoutCV.bounds.height-200)
+            theView.alpha = 1
+        
+        }, completion: nil)
         
     }
+    
+    
+
+    
     @objc func donePressed()
     {
         print("DonePressed")

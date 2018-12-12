@@ -20,10 +20,17 @@
 		AB4F1DA92192557600597440 /* workoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DA82192557600597440 /* workoutsVC.swift */; };
 		AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F1DAB21927E9900597440 /* workoutsCell.swift */; };
 		AB4F1DAF2192CEC400597440 /* toDo in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DAE2192CEC400597440 /* toDo */; };
-		AB4F1DB32197966100597440 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4F1DB22197966100597440 /* assets.xcassets */; };
+		AB57EA7021B327ED00C3BB5D /* discoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57EA6F21B327ED00C3BB5D /* discoverVC.swift */; };
+		AB57EA7321B32FE200C3BB5D /* discoverOBJ.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57EA7221B32FE200C3BB5D /* discoverOBJ.swift */; };
 		AB5C4579219D614A00D904C3 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C4578219D614A00D904C3 /* tabBarController.swift */; };
+		AB80685B21B8EFA500CED33C /* searchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80685A21B8EFA500CED33C /* searchVC.swift */; };
+		AB80685D21B8F18100CED33C /* searchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80685C21B8F18100CED33C /* searchCell.swift */; };
+		AB80685F21B8F7E900CED33C /* searchOBJ.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80685E21B8F7E900CED33C /* searchOBJ.swift */; };
+		AB80688C21BB17E600CED33C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80688B21BB17E600CED33C /* ProfileViewController.swift */; };
+		AB80688E21BC49EC00CED33C /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB80688D21BC49EC00CED33C /* assets.xcassets */; };
 		ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B02198F25200571DF1 /* workoutsTableView.swift */; };
 		ABB508B42198F30400571DF1 /* workoutsTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB508B32198F30400571DF1 /* workoutsTBCell.swift */; };
+		ABF1E20821B484B2009D7D39 /* discoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1E20721B484B2009D7D39 /* discoverCell.swift */; };
 		D647DE0F181999D900F4046C /* Pods_GymRats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926C322B49B65C30B2AC7C0B /* Pods_GymRats.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,10 +52,17 @@
 		AB4F1DA82192557600597440 /* workoutsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsVC.swift; sourceTree = "<group>"; };
 		AB4F1DAB21927E9900597440 /* workoutsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsCell.swift; sourceTree = "<group>"; };
 		AB4F1DAE2192CEC400597440 /* toDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = toDo; sourceTree = "<group>"; };
-		AB4F1DB22197966100597440 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		AB57EA6F21B327ED00C3BB5D /* discoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = discoverVC.swift; sourceTree = "<group>"; };
+		AB57EA7221B32FE200C3BB5D /* discoverOBJ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = discoverOBJ.swift; sourceTree = "<group>"; };
 		AB5C4578219D614A00D904C3 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
+		AB80685A21B8EFA500CED33C /* searchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchVC.swift; sourceTree = "<group>"; };
+		AB80685C21B8F18100CED33C /* searchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchCell.swift; sourceTree = "<group>"; };
+		AB80685E21B8F7E900CED33C /* searchOBJ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchOBJ.swift; sourceTree = "<group>"; };
+		AB80688B21BB17E600CED33C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AB80688D21BC49EC00CED33C /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		ABB508B02198F25200571DF1 /* workoutsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTableView.swift; sourceTree = "<group>"; };
 		ABB508B32198F30400571DF1 /* workoutsTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutsTBCell.swift; sourceTree = "<group>"; };
+		ABF1E20721B484B2009D7D39 /* discoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = discoverCell.swift; sourceTree = "<group>"; };
 		BDE0BE5C80EDE8128A2F3BA3 /* Pods-GymRats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymRats.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymRats/Pods-GymRats.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +89,8 @@
 		AB4F1D8021924AF000597440 = {
 			isa = PBXGroup;
 			children = (
-				AB4F1DB22197966100597440 /* assets.xcassets */,
+				AB80688D21BC49EC00CED33C /* assets.xcassets */,
+				AB57EA7121B32FA600C3BB5D /* Objects */,
 				AB4F1DAA21927E7B00597440 /* Cells */,
 				AB4F1D8B21924AF000597440 /* GymRats */,
 				AB4F1D8A21924AF000597440 /* Products */,
@@ -111,12 +126,15 @@
 		AB4F1DA121924B0500597440 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AB5C4578219D614A00D904C3 /* tabBarController.swift */,
 				AB4F1DA221924B2000597440 /* Home.swift */,
 				AB4F1DA421924B7D00597440 /* logInVC.swift */,
 				AB4F1DA621924B8A00597440 /* signUpVC.swift */,
 				AB4F1DA82192557600597440 /* workoutsVC.swift */,
 				ABB508B02198F25200571DF1 /* workoutsTableView.swift */,
-				AB5C4578219D614A00D904C3 /* tabBarController.swift */,
+				AB57EA6F21B327ED00C3BB5D /* discoverVC.swift */,
+				AB80685A21B8EFA500CED33C /* searchVC.swift */,
+				AB80688B21BB17E600CED33C /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -126,9 +144,20 @@
 			children = (
 				AB4F1DAB21927E9900597440 /* workoutsCell.swift */,
 				ABB508B32198F30400571DF1 /* workoutsTBCell.swift */,
-				AB3F920421A6310800EB649A /* workout.swift */,
+				ABF1E20721B484B2009D7D39 /* discoverCell.swift */,
+				AB80685C21B8F18100CED33C /* searchCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		AB57EA7121B32FA600C3BB5D /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				AB3F920421A6310800EB649A /* workout.swift */,
+				AB57EA7221B32FE200C3BB5D /* discoverOBJ.swift */,
+				AB80685E21B8F7E900CED33C /* searchOBJ.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		E0F0261A1B7DEFBA32C5C32E /* Pods */ = {
@@ -203,7 +232,7 @@
 				AB4F1D9A21924AF100597440 /* LaunchScreen.storyboard in Resources */,
 				AB4F1DAF2192CEC400597440 /* toDo in Resources */,
 				AB11B022219C07C2009894A8 /* GoogleService-Info.plist in Resources */,
-				AB4F1DB32197966100597440 /* assets.xcassets in Resources */,
+				AB80688E21BC49EC00CED33C /* assets.xcassets in Resources */,
 				AB4F1D9221924AF000597440 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +265,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GymRats/Pods-GymRats-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -243,6 +274,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -260,11 +293,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB57EA7321B32FE200C3BB5D /* discoverOBJ.swift in Sources */,
+				ABF1E20821B484B2009D7D39 /* discoverCell.swift in Sources */,
+				AB80685D21B8F18100CED33C /* searchCell.swift in Sources */,
+				AB57EA7021B327ED00C3BB5D /* discoverVC.swift in Sources */,
 				ABB508B12198F25200571DF1 /* workoutsTableView.swift in Sources */,
+				AB80685F21B8F7E900CED33C /* searchOBJ.swift in Sources */,
 				AB4F1DA721924B8A00597440 /* signUpVC.swift in Sources */,
 				AB4F1D8F21924AF000597440 /* ViewController.swift in Sources */,
 				AB3F920521A6310800EB649A /* workout.swift in Sources */,
+				AB80688C21BB17E600CED33C /* ProfileViewController.swift in Sources */,
 				AB5C4579219D614A00D904C3 /* tabBarController.swift in Sources */,
+				AB80685B21B8EFA500CED33C /* searchVC.swift in Sources */,
 				AB4F1D8D21924AF000597440 /* AppDelegate.swift in Sources */,
 				AB4F1DAC21927E9900597440 /* workoutsCell.swift in Sources */,
 				AB4F1DA321924B2000597440 /* Home.swift in Sources */,

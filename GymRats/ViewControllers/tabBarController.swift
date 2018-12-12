@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 import Firebase
+
 class tabBarController: UITabBarController
 {
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        checkLogin()
@@ -20,8 +23,22 @@ class tabBarController: UITabBarController
         guard let items = tabBar.items else { return }
         for item in items
         {
+            item.image! = resizeImage(image: item.image!, newWidth: 40)!
             item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -10, right: 0)
         }
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
     func checkLogin()
