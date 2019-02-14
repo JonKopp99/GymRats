@@ -1,6 +1,9 @@
 GymRats - *The **ultimate** fitness app*.
 
-**Split up workouts into 9 categories.**
+
+
+
+##Split up workouts into 9 categories.**
 
 
 ![](https://lh3.googleusercontent.com/mGGZTQGlT3GqLoO9S0nlZi0hVW5Hw-LezJKgrJlnoex039OgpXKlppPBjd4YS07tbd2qcLGYxYk)
