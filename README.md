@@ -1,4 +1,4 @@
-GymRats - *The **ultimate** fitness app*.
+## GymRats - *The **ultimate** fitness app*.
 
 
 
