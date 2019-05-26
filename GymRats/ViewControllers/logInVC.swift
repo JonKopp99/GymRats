@@ -1,6 +1,5 @@
 //
 //  ViewController.swift
-//  SwoleMates
 //
 //  Created by Jonathan Kopp on 10/22/18.
 //  Copyright © 2018 Jonathan Kopp. All rights reserved.
@@ -14,7 +13,6 @@ class LogInVC: UIViewController, UITextFieldDelegate {
     var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     
